@@ -1,3 +1,65 @@
+calc MACRO v1     
+    mov bl,v1
+    
+    lea dx, quantityPrompt
+    mov ah,9
+    int 21h
+    
+    mov ah,1
+    int 21h
+    
+    and al, 0Fh
+    mul bl
+    
+    AAM
+    
+    mov cx, ax
+    add cl, 30h
+    add ch, 30h 
+    
+    lea dx, price
+    mov ah,9
+    int 21h    
+    
+    mov dl,ch
+    mov ah,2
+    int 21h 
+    
+    mov dl,cl
+    mov ah,2
+    int 21h 
+    
+    mov dl,'0'
+    mov ah,2
+    int 21h
+    
+    mov dl,'/'
+    mov ah,2
+    int 21h
+    mov dl,'='
+    mov ah,2
+    int 21h 
+    
+    lea dx, backMainMenu
+    mov ah,9
+    int 21h
+    
+    lea dx, exitPrompt
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    cmp al,'1'
+    je DinnerMenu
+    
+    jmp exit   
+    
+    endm
+    
+    
+
 .model small
 .stack 100h
 .data
@@ -239,242 +301,20 @@ DinnerMenu:
 
 
 twenty:
-    
-    mov bl,2
-    
-    lea dx, quantityPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,1
-    int 21h
-    
-    and al, 0Fh
-    mul bl
-    
-    AAM
-    
-    mov cx, ax
-    add cl, 30h
-    add ch, 30h 
-    
-    lea dx, price
-    mov ah,9
-    int 21h    
-    
-    mov dl,ch
-    mov ah,2
-    int 21h 
-    
-    mov dl,cl
-    mov ah,2
-    int 21h 
-    
-    mov dl,'0'
-    mov ah,2
-    int 21h
-    
-    mov dl,'/'
-    mov ah,2
-    int 21h
-    mov dl,'='
-    mov ah,2
-    int 21h 
-    
-    lea dx, backMainMenu
-    mov ah,9
-    int 21h
-    
-    lea dx, exitPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,7
-    int 21h
-    
-    cmp al,'1'
-    je DinnerMenu
-    
-    jmp exit
-    
-    
+    calc 2
+       
 
 fourty:
 
-    mov bl,4
-    
-    lea dx, quantityPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,1
-    int 21h
-    
-    and al, 0Fh
-    mul bl
-    
-    AAM
-    
-    mov cx, ax
-    add cl, 30h
-    add ch, 30h 
-    
-    lea dx, price
-    mov ah,9
-    int 21h    
-    
-    mov dl,ch
-    mov ah,2
-    int 21h 
-    
-    mov dl,cl
-    mov ah,2
-    int 21h 
-    
-    mov dl,'0'
-    mov ah,2
-    int 21h
-    
-    mov dl,'/'
-    mov ah,2
-    int 21h
-    mov dl,'='
-    mov ah,2
-    int 21h 
-    
-    lea dx, backMainMenu
-    mov ah,9
-    int 21h
-    
-    lea dx, exitPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,7
-    int 21h
-    
-    cmp al,'1'
-    je DinnerMenu
-    
-    jmp exit
+    calc 4
 
 sixty: 
 
-    mov bl,6
-    
-    lea dx, quantityPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,1
-    int 21h
-    
-    and al, 0Fh
-    mul bl
-    
-    AAM
-    
-    mov cx, ax
-    add cl, 30h
-    add ch, 30h 
-    
-    lea dx, price
-    mov ah,9
-    int 21h    
-    
-    mov dl,ch
-    mov ah,2
-    int 21h 
-    
-    mov dl,cl
-    mov ah,2
-    int 21h 
-    
-    mov dl,'0'
-    mov ah,2
-    int 21h
-    
-    mov dl,'/'
-    mov ah,2
-    int 21h
-    mov dl,'='
-    mov ah,2
-    int 21h 
-    
-    lea dx, backMainMenu
-    mov ah,9
-    int 21h
-    
-    lea dx, exitPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,7
-    int 21h
-    
-    cmp al,'1'
-    je DinnerMenu
-    
-    jmp exit
+    calc 6
 
 eighty: 
 
-    mov bl,8
-    
-    lea dx, quantityPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,1
-    int 21h
-    
-    and al, 0Fh
-    mul bl
-    
-    AAM
-    
-    mov cx, ax
-    add cl, 30h
-    add ch, 30h 
-    
-    lea dx, price
-    mov ah,9
-    int 21h    
-    
-    mov dl,ch
-    mov ah,2
-    int 21h 
-    
-    mov dl,cl
-    mov ah,2
-    int 21h 
-    
-    mov dl,'0'
-    mov ah,2
-    int 21h
-    
-    mov dl,'/'
-    mov ah,2
-    int 21h
-    mov dl,'='
-    mov ah,2
-    int 21h 
-    
-    lea dx, backMainMenu
-    mov ah,9
-    int 21h
-    
-    lea dx, exitPrompt
-    mov ah,9
-    int 21h
-    
-    mov ah,7
-    int 21h
-    
-    cmp al,'1'
-    je DinnerMenu
-    
-    jmp exit
+    calc 8
     
 Update:
 
