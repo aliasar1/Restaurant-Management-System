@@ -51,14 +51,13 @@ calc MACRO v1
     mov ah,7
     int 21h
     
-    cmp al,'1'
-    je DinnerMenu
+    cmp al, '1'
+    je Main1
     
     jmp exit   
     
-    endm
-    
-    
+endm 
+  
 
 .model small
 .stack 100h
@@ -87,7 +86,40 @@ updateMenu      db 10,13,'        UPDATE MENU',10,13
                 db 'Press 1 for Add to Menu',10,13
                 db 'Press 2 for Delete from Menu',10,13
                 db 'Press 3 to return to Main',10,13,'$'   
+
+;LUNCH MENU
+LunchStarterMenu db 10,13,'        STARTER MENU',10,13
+                db 'Press 1 for French Fries. Rs 20',10,13
+                db 'Press 2 for Cheesy fries. Rs 20',10,13
+                db 'Press 3 for Samosa Beef. Rs 20',10,13
+                db 'Press 4 for Hummus. Rs 20',10,13 
+                db 'Press 5 for Spicy Mexican Wings. Rs 30',10,13
+                db 'Press 6 for Chicken Corn Soup. Rs 20',10,13
+                db 'Press 0 for return to back',10,13,'$'
                 
+LunchMainCourseMenu db 10,13,'      MAIN COURSE MENU',10,13
+                db 'Press 1 for Lahori Fish. Rs 40',10,13
+                db 'Press 2 for French Onion Steak. Rs 40',10,13
+                db 'Press 3 for Fajita Steak. Rs 40',10,13
+                db 'Press 4 for Chicken Biryani. Rs 60',10,13  
+                db 'Press 5 for Mutton Pulao. Rs 60',10,13
+                db 'Press 6 for Whole Chicken Roasted. Rs 80',10,13
+                db 'Press 7 for Stuffed Beef Whole Rs 80',10,13
+                db 'Press 8 for Roasted Turkey. Rs 80',10,13
+                db 'Press 0 to return to back',10,13,'$'
+                
+LunchDessertMenu  db 10,13,'         DESSERT MENU',10,13
+                db 'Press 1 for Shahi Tukra. Rs 20',10,13
+                db 'Press 2 for Fudge Brownie. Rs 20',10,13
+                db 'Press 3 for Flavored Icecream. Rs 20',10,13
+                db 'Press 4 for Choclate Moose Cake. Rs 60',10,13
+                db 'Press 5 for Ferrero Roacher Cake. Rs 80',10,13
+                db 'Press 6 for Machiatos. Rs 40',10,13,
+                db 'Press 0 to return to back',10,13,'$'                          
+                
+
+
+;DINNER MENU                
 DinnerStarterMenu db 10,13,'        STARTER MENU',10,13
                 db 'Press 1 for Bacon rings. Rs 20',10,13
                 db 'Press 2 for Prawn and ginger dumplings. Rs 40',10,13
@@ -105,7 +137,7 @@ DinnerMainCourseMenu db 10,13,'      MAIN COURSE MENU',10,13
                 db 'Press 5 for Channa Pindi. Rs 40',10,13
                 db 'Press 6 for Lamb Rogan Josh. Rs 80',10,13
                 db 'Press 7 for Butter chicken Rs 60',10,13
-                db 'Press for Goat Feet. Rs 80',10,13
+                db 'Press 8 for Goat Feet. Rs 80',10,13
                 db 'Press 0 to return to back',10,13,'$'
                 
 DinnerDessertMenu  db 10,13,'         DESSERT MENU',10,13
@@ -148,7 +180,7 @@ Main1:
     je Breakfast
     
     cmp bl,'2'
-    je Lunch
+    je LunchMenu
     
     cmp bl,'3'
     je DinnerMenu
@@ -163,8 +195,137 @@ Main1:
 ; Bilal
 Breakfast:
 
-; Hammad
-Lunch:
+; Hammad 
+LunchMenu:
+    
+    lea dx, menuMenu 
+    mov ah, 9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je LunchStarter
+    
+    cmp bl,'2'
+    je LunchMain
+    
+    cmp bl,'3'
+    je LunchDesserts
+    
+    cmp bl,'4'
+    je Main1
+
+LunchStarter:   
+
+    lea dx, LunchStarterMenu
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je twenty
+    
+    cmp bl,'2'
+    je twenty
+    
+    cmp bl,'3'
+    je  twenty
+    
+    cmp bl,'4'
+    je  twenty
+      
+    cmp bl,'5'
+    je fourty
+    
+    cmp bl,'6'
+    je  twenty
+    
+    cmp bl,'0'
+    je LunchMenu
+    
+    jmp LunchStarter 
+    
+LunchMain:
+    lea dx, LunchMainCourseMenu
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je fourty
+    
+    cmp bl,'2'
+    je fourty
+    
+    cmp bl,'3'
+    je fourty
+    
+    cmp bl,'4'
+    je sixty 
+      
+    cmp bl,'5'
+    je sixty
+    
+    cmp bl,'6'
+    je eighty
+    
+    cmp bl,'7'
+    je eighty
+    
+    cmp bl,'8'
+    je eighty 
+    
+    cmp bl,'0'
+    je LunchMenu
+    
+    jmp DinnerMain 
+    
+LunchDesserts:
+    lea dx, LunchDessertMenu
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je twenty
+    
+    cmp bl,'2'
+    je twenty
+    
+    cmp bl,'3'
+    je twenty
+    
+    cmp bl,'4'
+    je sixty 
+    
+    cmp bl,'5'
+    je eighty
+    
+    cmp bl,'6'
+    je fourty 
+    
+    cmp bl,'0'
+    je LunchMenu
+    
+    jmp LunchDesserts                              
+                  
+
 
 ; Ali Asar
 DinnerStarter:   
@@ -300,20 +461,16 @@ DinnerMenu:
     ;jmp Main1
 
 
-twenty:
+twenty: 
     calc 2
-       
-
+    
 fourty:
-
     calc 4
 
 sixty: 
-
     calc 6
-
+    
 eighty: 
-
     calc 8
     
 Update:
