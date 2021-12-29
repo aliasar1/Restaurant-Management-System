@@ -2,15 +2,14 @@
 .stack 100h
 .data
 
-welcome         db 10,13,'--------Welcome to ABHHM--------',10,13,10,13
+welcome         db 10,13,'--------Welcome to ABHHM--------',10,13,10,13 
+
 
 mainMenu        db 10,13,'        MAIN',10,13
-                db 'Press 1 for Menu',10,13
-                db 'Press 2 for Staff',10,13
-                db 'Press 3 for Inventory',10,13
-                db 'Press 4 for Sales',10,13
-                db 'Press 5 to  Update Menu',10,13
-                db 'Press 6 to return to Exit',10,13,'$'
+                db 'Press 1 for Breakfast',10,13
+                db 'Press 2 for Lunch',10,13
+                db 'Press 3 for Dinner',10,13
+                db 'Press 0 to return to Exit',10,13,'$'
 
 
 ;           MENU
@@ -21,75 +20,49 @@ menuMenu        db 10,13,'        MENU',10,13
                 db 'Press 3 for Desert',10,13
                 db 'Press 4 to return to Main',10,13,'$'
 
-; Staff
-staffMenu       db 10,13,'        Staff',10,13
-                db 'Press 1 for Current Staff',10,13
-                db 'Press 2 for Staff Salary',10,13
-                db 'Press 3 for Staf Schedule',10,13
-                db 'Press 4 to return to Main',10,13,'$'
-
-
-; Inventory
-inventoryMenu   db 10,13,'        INVENTORY',10,13
-                db 'Press 1 for Current Inventory',10,13
-                db 'Press 2 for Order Inventory',10,13
-                db 'Press 3 for Add New Inventory',10,13
-                db 'Press 4 to return to Main',10,13,'$'
-
-
-
-; Sales
-salesMenu       db 10,13,'        SALES',10,13
-                db 'Press 1 for Current Sales',10,13
-                db 'Press 2 for Last Months Sales',10,13
-                db 'Press 3 for Profit',10,13
-                db 'Press 4 to return to Main',10,13,'$'
-                 
-
-
 ; Update Menu
 updateMenu      db 10,13,'        UPDATE MENU',10,13
                 db 'Press 1 for Add to Menu',10,13
                 db 'Press 2 for Delete from Menu',10,13
-                db 'Press 3 to return to Main',10,13,'$'
+                db 'Press 3 to return to Main',10,13,'$'   
                 
-;****************************************************************************************
+DinnerStarterMenu db 10,13,'        STARTER MENU',10,13
+                db 'Press 1 for Bacon rings. Rs 20',10,13
+                db 'Press 2 for Prawn and ginger dumplings. Rs 40',10,13
+                db 'Press 3 for Tuna wings. Rs 60',10,13
+                db 'Press 4 for Sweet french fries Rs 20',10,13 
+                db 'Press 5 for Buffalo Wings Rs 60',10,13
+                db 'Press 6 for Mirchi Pakora Rs 20',10,13
+                db 'Press 0 for return to back',10,13,'$'
+                
+DinnerMainCourseMenu db 10,13,'      MAIN COURSE MENU',10,13
+                db 'Press 1 for Peshawari Chapli Kebab. Rs 60',10,13
+                db 'Press 2 for Haleem. Rs 60',10,13
+                db 'Press 3 for Nalli Nihari. Rs 80',10,13
+                db 'Press 4 for Paya Curry. Rs 40',10,13  
+                db 'Press 5 for Channa Pindi. Rs 40',10,13
+                db 'Press 6 for Lamb Rogan Josh. Rs 80',10,13
+                db 'Press 7 for Butter chicken Rs 60',10,13
+                db 'Press for Goat Feet. Rs 80',10,13
+                db 'Press 0 to return to back',10,13,'$'
+                
+DinnerDessertMenu  db 10,13,'         DESSERT MENU',10,13
+                db 'Press 1 for Gulab Jamun. Rs 20',10,13
+                db 'Press 2 for Ice Cream. Rs 40',10,13
+                db 'Press 3 for Nutella Brownie. Rs 60',10,13
+                db 'Press 4 for Chocolate Cake. Rs 60',10,13
+                db 'Press 5 for Cheese Cake. Rs 80',10,13
+                db 'Press 6 for Mocktails. Rs 60',10,13,
+                db 'Press 0 to return to back',10,13,'$'                          
+                
+;Quantity                                             
 
-;Starter
-starterMenu     db 10,13,'        STARTER MENU',10,13
-                db 'Press 1 Beef Wellington tart.  Rs 300',10,13
-                db 'Press 2 The spicy fish. Rs 320',10,13
-                db 'Press 3 Tuna wings. Rs 400',10,13
-                db 'Press 4 Sweet fried. Rs 240',10,13
-                db 'Press 5 Bacon rings. Rs 380',10,13
-                db 'Press 6 Butter chicken pops. Rs 420',10,13
-                db 'Press 7 Prawn and ginger dumplings. Rs 340',10,13
-                db 'Press 8 Blooming onion. Rs 280',10,13
-                db 'Press 0 To return to Menu page',10,13,'$'
-                
-;Main course 
-mainCourseMenu  db 10,13,'         MAIN COURSE MENU',10,13
-                db 'Press 1 Peshawari Chapli Kebab. Rs 1700',10,13
-                db 'Press 2 Haleem. Rs 1200',10,13
-                db 'Press 3 Nalli Nihari. Rs 1600',10,13
-                db 'Press 4 Barrah Kebab. Rs 1300',10,13
-                db 'Press 5 Paya Curry. Rs 2100',10,13
-                db 'Press 6 Channa Pindi. Rs 1100',10,13
-                db 'Press 7 Lamb Rogan Josh. Rs 3500',10,13
-                db 'Press 8 Beggars Purse. Rs 2800',10,13
-                db 'Press 0 To return to Menu page',10,13,'$'
-                
-;Desert 
-desertMenu      db 10,13,'         DESERT MENU',10,13
-                db 'Press 1 Gulab Jamun. Rs 200',10,13
-                db 'Press 2 Ice Cream. Rs 250',10,13
-                db 'Press 3 Nutella Brownie. Rs 200',10,13
-                db 'Press 4 Chocolate Cake. Rs 275',10,13
-                db 'Press 5 Cheese Cake. Rs 299',10,13
-                db 'Press 6 Mocktails. Rs 249',10,13
-                db 'Press 7 Milk Shake. Rs 300',10,13
-                db 'Press 0 To return to Menu page',10,13,'$'
-                                                   
+quantityPrompt db 10,13,'Quantity: $'   
+
+price db 10,13,'Total Price: $'    
+
+backMainMenu db 10,13,10,13,'1.Go Back to Main Menu$'
+exitPrompt db 10,13,'0.Exit$'                        
 
 .code
 
@@ -110,28 +83,136 @@ Main1:
     mov bl,al
     
     cmp bl,'1'
-    je Menu
+    je Breakfast
     
     cmp bl,'2'
-    je Staff
+    je Lunch
     
     cmp bl,'3'
-    je Inventory
+    je DinnerMenu
     
-    cmp bl,'4'
-    je Sales
-    
-    cmp bl,'5'
-    je Update
-    
-    cmp bl,'6'
+    cmp bl,'0'
     je Exit
     
-    jmp Menu
+    jmp Main1
     
-; FIRST LAYER INTO MAIN    
+; FIRST LAYER INTO MAIN  
 
-Menu:
+; Bilal
+Breakfast:
+
+; Hammad
+Lunch:
+
+; Ali Asar
+DinnerStarter:   
+
+    lea dx, DinnerStarterMenu
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je twenty
+    
+    cmp bl,'2'
+    je fourty
+    
+    cmp bl,'3'
+    je sixty
+    
+    cmp bl,'4'
+    je twenty 
+      
+    cmp bl,'5'
+    je sixty
+    
+    cmp bl,'6'
+    je twenty 
+    
+    cmp bl,'0'
+    je DinnerMenu
+    
+    jmp DinnerStarter 
+    
+DinnerMain:
+    lea dx, DinnerMainCourseMenu
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je sixty
+    
+    cmp bl,'2'
+    je sixty
+    
+    cmp bl,'3'
+    je eighty
+    
+    cmp bl,'4'
+    je fourty 
+      
+    cmp bl,'5'
+    je fourty
+    
+    cmp bl,'6'
+    je eighty
+    
+    cmp bl,'7'
+    je sixty
+    
+    cmp bl,'8'
+    je eighty 
+    
+    cmp bl,'0'
+    je DinnerMenu
+    
+    jmp DinnerMain 
+    
+DinnerDesserts:
+    lea dx, DinnerDessertMenu
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    mov bl,al
+    
+    cmp bl,'1'
+    je twenty
+    
+    cmp bl,'2'
+    je fourty
+    
+    cmp bl,'3'
+    je sixty
+    
+    cmp bl,'4'
+    je sixty 
+    
+    cmp bl,'5'
+    je eighty
+    
+    cmp bl,'6'
+    je sixty 
+    
+    cmp bl,'0'
+    je DinnerMenu
+    
+    jmp DinnerDesserts        
+    
+
+DinnerMenu:
     
     lea dx, menuMenu 
     mov ah, 9
@@ -143,92 +224,257 @@ Menu:
     mov bl,al
     
     cmp bl,'1'
-    je Starters
+    je DinnerStarter
     
     cmp bl,'2'
-    je MainCourse
+    je DinnerMain
     
     cmp bl,'3'
-    je Deserts
+    je DinnerDesserts
     
     cmp bl,'4'
     je Main1
     
     ;jmp Main1
-    
-    
 
-Staff:
 
-    lea dx, staffMenu
-    mov ah, 9
+twenty:
+    
+    mov bl,2
+    
+    lea dx, quantityPrompt
+    mov ah,9
+    int 21h
+    
+    mov ah,1
+    int 21h
+    
+    and al, 0Fh
+    mul bl
+    
+    AAM
+    
+    mov cx, ax
+    add cl, 30h
+    add ch, 30h 
+    
+    lea dx, price
+    mov ah,9
+    int 21h    
+    
+    mov dl,ch
+    mov ah,2
+    int 21h 
+    
+    mov dl,cl
+    mov ah,2
+    int 21h 
+    
+    mov dl,'0'
+    mov ah,2
+    int 21h
+    
+    mov dl,'/'
+    mov ah,2
+    int 21h
+    mov dl,'='
+    mov ah,2
+    int 21h 
+    
+    lea dx, backMainMenu
+    mov ah,9
+    int 21h
+    
+    lea dx, exitPrompt
+    mov ah,9
     int 21h
     
     mov ah,7
     int 21h
     
-    mov bl,al
-           
-    cmp bl,'1'
-    je CurrentStaff
+    cmp al,'1'
+    je DinnerMenu
     
-    cmp bl,'2'
-    je Salary
+    jmp exit
     
-    cmp bl,'3'
-    je Schedule
     
-    cmp bl,'4'
-    je Main1       
-   
 
-Inventory:
+fourty:
 
-    lea dx, inventoryMenu 
-    mov ah, 9
+    mov bl,4
+    
+    lea dx, quantityPrompt
+    mov ah,9
+    int 21h
+    
+    mov ah,1
+    int 21h
+    
+    and al, 0Fh
+    mul bl
+    
+    AAM
+    
+    mov cx, ax
+    add cl, 30h
+    add ch, 30h 
+    
+    lea dx, price
+    mov ah,9
+    int 21h    
+    
+    mov dl,ch
+    mov ah,2
+    int 21h 
+    
+    mov dl,cl
+    mov ah,2
+    int 21h 
+    
+    mov dl,'0'
+    mov ah,2
+    int 21h
+    
+    mov dl,'/'
+    mov ah,2
+    int 21h
+    mov dl,'='
+    mov ah,2
+    int 21h 
+    
+    lea dx, backMainMenu
+    mov ah,9
+    int 21h
+    
+    lea dx, exitPrompt
+    mov ah,9
     int 21h
     
     mov ah,7
     int 21h
     
-    mov bl,al
-           
-    cmp bl,'1'
-    je CurrentInventory
+    cmp al,'1'
+    je DinnerMenu
     
-    cmp bl,'2'
-    je OrderInventory
-    
-    cmp bl,'3'
-    je AddInventory
-    
-    cmp bl,'4'
-    je Main1 
+    jmp exit
 
-Sales:
+sixty: 
 
-    lea dx, salesMenu
-    mov ah, 9
+    mov bl,6
+    
+    lea dx, quantityPrompt
+    mov ah,9
+    int 21h
+    
+    mov ah,1
+    int 21h
+    
+    and al, 0Fh
+    mul bl
+    
+    AAM
+    
+    mov cx, ax
+    add cl, 30h
+    add ch, 30h 
+    
+    lea dx, price
+    mov ah,9
+    int 21h    
+    
+    mov dl,ch
+    mov ah,2
+    int 21h 
+    
+    mov dl,cl
+    mov ah,2
+    int 21h 
+    
+    mov dl,'0'
+    mov ah,2
+    int 21h
+    
+    mov dl,'/'
+    mov ah,2
+    int 21h
+    mov dl,'='
+    mov ah,2
+    int 21h 
+    
+    lea dx, backMainMenu
+    mov ah,9
+    int 21h
+    
+    lea dx, exitPrompt
+    mov ah,9
     int 21h
     
     mov ah,7
     int 21h
     
-    mov bl,al
-           
-    cmp bl,'1'
-    je CurrentSales
+    cmp al,'1'
+    je DinnerMenu
     
-    cmp bl,'2'
-    je LastMonthsSale
+    jmp exit
+
+eighty: 
+
+    mov bl,8
     
-    cmp bl,'3'
-    je Profit
+    lea dx, quantityPrompt
+    mov ah,9
+    int 21h
     
-    cmp bl,'4'
-    je Main1 
+    mov ah,1
+    int 21h
     
-    ;jmp Main1
+    and al, 0Fh
+    mul bl
+    
+    AAM
+    
+    mov cx, ax
+    add cl, 30h
+    add ch, 30h 
+    
+    lea dx, price
+    mov ah,9
+    int 21h    
+    
+    mov dl,ch
+    mov ah,2
+    int 21h 
+    
+    mov dl,cl
+    mov ah,2
+    int 21h 
+    
+    mov dl,'0'
+    mov ah,2
+    int 21h
+    
+    mov dl,'/'
+    mov ah,2
+    int 21h
+    mov dl,'='
+    mov ah,2
+    int 21h 
+    
+    lea dx, backMainMenu
+    mov ah,9
+    int 21h
+    
+    lea dx, exitPrompt
+    mov ah,9
+    int 21h
+    
+    mov ah,7
+    int 21h
+    
+    cmp al,'1'
+    je DinnerMenu
+    
+    jmp exit
     
 Update:
 
@@ -257,175 +503,12 @@ Update:
 
 ; 1. menu Menu Options
 
-Starters: 
-    lea dx, starterMenu
-    mov ah,9
-    int 21h
-    
-    ;sti1 = starterItem 1 and so on....
-    
-    mov ah,7
-    int 21h
-    
-    cmp al, '1'
-    je sti1
-    
-    cmp al, '2'
-    je sti2
-    
-    cmp al, '3'
-    je sti3
-    
-    cmp al, '4'
-    je sti4   
-    
-    cmp al, '5'
-    je sti5
-    
-    cmp al, '6'
-    je sti6
-    
-    cmp al, '7'
-    je sti7
-    
-    cmp al, '8'
-    je sti8
-    
-    cmp al,'0'
-    je Menu
-    
-    jmp Starters
+Starters:
 
+MainCourse:
 
-; Here logic and calculation for food should be implemented present in Starter Menu       
-sti1:
-sti2:
-sti3:
-sti4:
-sti5:
-sti6:
-sti7:
-sti8:    
+Deserts:
 
-MainCourse: 
-    lea dx, mainCourseMenu
-    mov ah,9
-    int 21h
-    
-    ;mc1 = mainCourseItem1
-    
-    mov ah,7
-    int 21h
-    
-    cmp al,'1'
-    je mc1
-    
-    cmp al,'2'
-    je mc2
-    
-    cmp al,'3'
-    je mc3
-    
-    cmp al,'4'
-    je mc4
-    
-    cmp al,'5'
-    je mc5
-    
-    cmp al,'6'
-    je mc6
-    
-    cmp al,'7'
-    je mc7
-    
-    cmp al,'8'
-    je mc8
-    
-    cmp al,'0'
-    je Menu
-    
-    jmp MainCourse
-
-; Here logic and calculation for food should be implemented present in main course Menu
-mc1:
-mc2:
-mc3:
-mc4:
-mc5:
-mc6:
-mc7:
-mc8:
-
-Deserts: 
-    lea dx, desertMenu
-    mov ah,9
-    int 21h 
-    
-    ;d1 = desertItem1
-    
-    mov ah,7
-    int 21h
-    
-    cmp al,'1'
-    je d1
-    
-    cmp al,'2'
-    je d2
-    
-    cmp al,'3'
-    je d3
-    
-    cmp al,'4'
-    je d4
-    
-    cmp al,'5'
-    je d5
-    
-    cmp al,'6'
-    je d6
-    
-    cmp al,'7'
-    je d7
-    
-    cmp al,'0'
-    je Menu
-    
-    jmp Deserts 
-
-; Here logic and calculation for food should be implemented present in desert Menu
-d1:
-d2:
-d3:
-d4:
-d5:
-d6:
-d7:
-
-; 2. Staff Menu Options
-
-CurrentStaff:
-
-Salary:
-
-Schedule:
-
-
-; 3. Inverntory Menu Options
-
-CurrentInventory:
-
-OrderInventory:
-
-AddInventory:
-
-
-; 4. Sales Menu Options
-
-CurrentSales:
-
-LastMonthsSale:
-    
-Profit:
 
 
 ; 5. Update Menu Options
