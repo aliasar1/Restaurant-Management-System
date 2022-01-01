@@ -166,6 +166,7 @@ menuMenu        db 10,13,'        MENU',10,13
                 db 'Press 1 for Starters',10,13
                 db 'Press 2 for Main Course',10,13
                 db 'Press 3 for Dessert',10,13
+                db 'Press 3 for Desert',10,13
                 db 'Press 4 to Return to Main Menu',10,13,'$'
 
 ; Update Menu
@@ -182,6 +183,11 @@ BreakFastStarterMenu db 10,13,'        STARTER MENU',10,13
                 db 'Press 4 for Tea Karak                   Rs 40',10,13 
                 db 'Press 5 for Green Tea                   Rs 20',10,13
                 db 'Press 6 for Orange Juice                Rs 40',10,13
+                db 'Press 2 for Espresso                    Rs 90',10,13
+                db 'Press 3 for Tea                         Rs 20',10,13
+                db 'Press 4 for Tea Karak                   Rs 30',10,13 
+                db 'Press 5 for Green Tea                   Rs 20',10,13
+                db 'Press 6 for Orange Juice                Rs 50',10,13
                 db 'Press 0 to go back',10,13,'$'
 
 BreakFastMainCourseMenu db 10,13,'      MAIN COURSE MENU',10,13
@@ -192,6 +198,7 @@ BreakFastMainCourseMenu db 10,13,'      MAIN COURSE MENU',10,13
                 db 'Press 5 for Alu Paratha.                Rs 20',10,13
                 db 'Press 6 for Egg & Hashbrown Wrap.       Rs 80',10,13
                 db 'Press 7 for Qeema paratha               Rs 40',10,13
+                db 'Press 7 for Qeema paratha               Rs 30',10,13
                 db 'Press 8 for Chicken Karahi              Rs 80',10,13
                 db 'Press 0 to go back',10,13,'$'
 
