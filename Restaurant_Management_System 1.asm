@@ -1,3 +1,73 @@
+; Username and password validation to use system
+check macro v1,v2,v3,v4,v5,v6 
+    local L1, check1, compare, wrong, right, print_star, L2  
+    lea dx, v1
+    call print
+
+    mov DI, offset v2
+    mov SI, offset v3 
+
+L2: 
+    mov al, [SI]
+    cmp al,'$'
+    je L1 
+    inc SI
+    inc cnt
+    jmp L2
+    
+L1:
+    mov ah,7
+    int 21h 
+    mov dl,al
+    
+    cmp al,13
+    je check1 
+
+    mov [DI], al
+    inc DI
+    ;inc count 
+    cmp v6,31h
+    je print_star
+    mov ah,2
+    int 21h
+    jmp L1
+    
+    call new_line
+    
+
+print_star:
+    call star
+    jmp L1    
+    
+check1:       
+    mov cx,cnt 
+    mov SI, offset v3
+    mov DI, offset v2 
+    
+compare: 
+    mov al,[SI]
+    mov bl,[DI]
+    cmp al,bl
+    jne wrong
+    inc SI
+    inc DI
+    loop compare
+    jmp right
+    
+wrong:
+    call new_line
+    lea dx, v4
+    call print
+    jmp Exit
+      
+right:
+    call new_line
+    lea dx, v5
+    call print   
+    mov passC, 31h 
+    
+    endm
+
 calc MACRO v1     
     mov bl,v1
     
@@ -61,9 +131,26 @@ endm
 
 .model small
 .stack 100h
-.data
+.data  
 
-welcome         db 10,13,'--------Welcome to ABHHM--------',10,13,10,13 
+prompt1 db "Enter Username: $" 
+user_name db 30 dup('$')
+uname db 'zabrestaurant','$'
+correct1 db "Correct username$"
+incorrect1 db "Incorrect username$"        
+
+prompt db "Enter password: $" 
+user_pass db 30 dup('$')
+pass db 'szabist','$'
+correct db "Correct password$"
+incorrect db "Incorrect password$"  
+;count dw 0
+star1 db 0   
+             
+passC db ?  
+cnt dw ?
+
+welcome         db 10,13,10,13,'--------Welcome to ABHHM--------',10,13,10,13 
 
 
 mainMenu        db 10,13,'        MAIN',10,13
@@ -199,7 +286,17 @@ exitPrompt db 10,13,'0.Exit$'
 main proc
     mov ax, @data
     mov ds,ax
-    ; DataSegment Init Done!!
+    ; DataSegment Init Done!!    
+    
+    check prompt1, user_name, uname, incorrect1, correct1, star1
+    cmp passC,30h
+    je Exit
+             
+    call new_line 
+    mov star1,31h       
+    ;mov count,0 
+    mov cnt,0
+    check prompt, user_pass, pass, incorrect, correct, star1 
     
 Main1:
     
@@ -621,7 +718,7 @@ DinnerMenu:
     cmp bl,'4'
     je Main1
     
-    ;jmp Main1
+    jmp DinnerMenu
 
 
 twenty: 
@@ -636,55 +733,35 @@ sixty:
 eighty: 
     calc 8
     
-Update:
-
-    lea dx, updateMenu 
-    mov ah, 9
-    int 21h
-    
-     
-    mov ah,7
-    int 21h
-    
-    mov bl,al
-           
-    cmp bl,'1'
-    je AddToMenu
-    
-    cmp bl,'2'
-    je DeleteFromMenu
-    
-    cmp bl,'3'
-    je Main1 
-    
-    ;jmp Main1
-    
-; SECOND LAYER INTO EACH SUB-MENU
-
-; 1. menu Menu Options
-
-Starters:
-
-MainCourse:
-
-Deserts:
-
-
-
-; 5. Update Menu Options
-
-AddToMenu:
-
-DeleteFromMenu:
-    
-
-
-;---------------------------------
-    
 Exit:
     
     mov ah, 4ch
     int 21h
     
-    main endp
+    main endp 
+    
+; Helper procs    
+star proc
+    mov dl,'*'
+    mov ah,2
+    int 21h
+    ret
+    star endp 
+
+new_line proc
+    mov dl,10
+    mov ah,2
+    int 21h
+    mov dl,13
+    mov ah,2
+    int 21h
+    ret 
+    new_line endp 
+
+print proc
+    mov ah,9
+    int 21h
+    ret
+    print endp    
+    
 end main
