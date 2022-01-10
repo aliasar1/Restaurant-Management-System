@@ -1,12 +1,14 @@
+include 'emu8086.inc'
+
 ; Username and password validation to use system  
 
-check macro v1,v2,v3,v4,v5,v6 
+authentication MACRO vPrompt,vInput,vCheckValue,vIncorrect,vCorrect 
     local L1, check1, compare, wrong, right, print_star, L2  
-    lea dx, v1
-    call print
+    lea dx, vPrompt
+    call print1
 
-    mov DI, offset v2
-    mov SI, offset v3 
+    mov DI, offset vInput
+    mov SI, offset vCheckValue 
 
 L2: 
     mov al, [SI]
@@ -25,9 +27,8 @@ L1:
     je check1 
 
     mov [DI], al
-    inc DI
-    ;inc count 
-    cmp v6,31h
+    inc DI     
+    cmp passC,31h
     je print_star
     mov ah,2
     int 21h
@@ -41,9 +42,9 @@ print_star:
     jmp L1    
     
 check1:       
-    mov cx,cnt 
-    mov SI, offset v3
-    mov DI, offset v2 
+    mov cx, cnt 
+    mov SI, offset vCheckValue
+    mov DI, offset vInput 
     
 compare: 
     mov al,[SI]
@@ -57,20 +58,20 @@ compare:
     
 wrong:
     call new_line
-    lea dx, v4
-    call print
+    lea dx, vIncorrect
+    call print1
     jmp Exit
       
 right:
     call new_line
-    lea dx, v5
-    call print   
+    lea dx, vCorrect
+    call print1   
     mov passC, 31h 
     
     endm
 
-calc MACRO v1     
-    mov bl,v1
+calc MACRO vPrompt     
+    mov bl,vPrompt
     
     lea dx, quantityPrompt
     mov ah,9
@@ -144,9 +145,7 @@ prompt db "Enter password: $"
 user_pass db 30 dup('$')
 pass db 'szabist','$'
 correct db "Correct password$"
-incorrect db "Incorrect password$"  
-;count dw 0
-star1 db 0   
+incorrect db "Incorrect password$"    
              
 passC db ?  
 cnt dw ?
@@ -275,6 +274,8 @@ price db 10,13,'Total Price: $'
 backMainMenu db 10,13,10,13,'1.Go Back to Main Menu$'
 exitPrompt db 10,13,'0.Exit$'
 
+bye db 10,13,'POS is shutting down!$'
+
 .code
 
 main proc
@@ -282,18 +283,14 @@ main proc
     mov ds,ax
     ; DataSegment Init Done!!    
     
-    check prompt1, user_name, uname, incorrect1, correct1, star1
-    cmp passC,30h
-    je Exit
+    authentication prompt1, user_name, uname, incorrect1, correct1
              
     call new_line 
-    mov star1,31h       
-    ;mov count,0 
     mov cnt,0
-    check prompt, user_pass, pass, incorrect, correct, star1 
+    authentication prompt, user_pass, pass, incorrect, correct   
     
 Main1:
-    
+    call CLEAR_SCREEN 
     lea dx, welcome
     mov ah, 9
     int 21h
@@ -321,6 +318,7 @@ Main1:
 
 ; Bilal
 BreakfastMenu: 
+    call CLEAR_SCREEN 
     lea dx, menuMenu 
     mov ah, 9
     int 21h
@@ -340,9 +338,12 @@ BreakfastMenu:
     je BreakFastDessert
     
     cmp bl,'4'
-    je Main1
+    je Main1 
+    
+    jmp BreakfastMenu
 
 BreakFastStarter:
+    call CLEAR_SCREEN 
     lea dx, BreakFastStarterMenu
     mov ah,9
     int 21h 
@@ -377,6 +378,7 @@ BreakFastStarter:
 
 
 BreakFastMainCourse: 
+    call CLEAR_SCREEN 
     lea dx, BreakFastMainCourseMenu
     mov ah,9
     int 21h 
@@ -415,7 +417,8 @@ BreakFastMainCourse:
     
     jmp BreakFastMainCourse
 
-BreakFastDessert: 
+BreakFastDessert:
+    call CLEAR_SCREEN  
     lea dx, BreakFastDessertMenu
     mov ah,9
     int 21h
@@ -451,7 +454,7 @@ BreakFastDessert:
 
 ; Hammad 
 LunchMenu:
-    
+    call CLEAR_SCREEN 
     lea dx, menuMenu 
     mov ah, 9
     int 21h
@@ -471,10 +474,12 @@ LunchMenu:
     je LunchDesserts
     
     cmp bl,'4'
-    je Main1
+    je Main1 
+    
+    jmp LunchMenu 
 
 LunchStarter:   
-
+    call CLEAR_SCREEN 
     lea dx, LunchStarterMenu
     mov ah,9
     int 21h
@@ -508,6 +513,7 @@ LunchStarter:
     jmp LunchStarter 
     
 LunchMain:
+    call CLEAR_SCREEN 
     lea dx, LunchMainCourseMenu
     mov ah,9
     int 21h
@@ -547,6 +553,7 @@ LunchMain:
     jmp DinnerMain 
     
 LunchDesserts:
+    call CLEAR_SCREEN 
     lea dx, LunchDessertMenu
     mov ah,9
     int 21h
@@ -582,7 +589,8 @@ LunchDesserts:
 
 
 ; Ali Asar
-DinnerStarter:   
+DinnerStarter:
+    call CLEAR_SCREEN    
 
     lea dx, DinnerStarterMenu
     mov ah,9
@@ -617,6 +625,7 @@ DinnerStarter:
     jmp DinnerStarter 
     
 DinnerMain:
+    call CLEAR_SCREEN 
     lea dx, DinnerMainCourseMenu
     mov ah,9
     int 21h
@@ -656,6 +665,7 @@ DinnerMain:
     jmp DinnerMain 
     
 DinnerDesserts:
+    call CLEAR_SCREEN 
     lea dx, DinnerDessertMenu
     mov ah,9
     int 21h
@@ -690,7 +700,7 @@ DinnerDesserts:
     
 
 DinnerMenu:
-    
+    call CLEAR_SCREEN 
     lea dx, menuMenu 
     mov ah, 9
     int 21h
@@ -728,7 +738,9 @@ eighty:
     calc 8
     
 Exit:
-    
+    call CLEAR_SCREEN 
+    lea dx,bye
+    call print1 
     mov ah, 4ch
     int 21h
     
@@ -753,10 +765,12 @@ new_line proc
     ret 
     new_line endp 
 
-print proc
+print1 proc
     mov ah,9
     int 21h
     ret
-    print endp    
+    print1 endp  
+
+DEFINE_CLEAR_SCREEN 
     
 end main
